@@ -34,11 +34,23 @@ const Hero = () => {
 
       {/* Contenido principal */}
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Logo con efecto de brillo */}
-        <div className="relative inline-block mb-12">
+        {/* Logo con efecto de brillo mejorado */}
+        <div className="relative inline-block mb-12 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-nomada-gold/20 to-transparent animate-shine" />
-          <h1 className="text-6xl md:text-8xl font-bold text-nomada-gold mb-4 tracking-tighter">
-            NÓMADA
+          <h1 className="relative text-6xl md:text-8xl font-bold mb-4 tracking-tighter">
+            {["N", "Ó", "M", "A", "D", "A"].map((letter, index) => (
+              <span
+                key={index}
+                className="inline-block text-nomada-gold hover:scale-110 transition-transform duration-300"
+                style={{
+                  animation: `float ${3 + Math.random()}s ease-in-out infinite`,
+                  animationDelay: `${index * 0.1}s`,
+                  textShadow: '0 0 20px rgba(197, 165, 114, 0.3)'
+                }}
+              >
+                {letter}
+              </span>
+            ))}
           </h1>
           <p className="text-nomada-beige/80 text-xl md:text-2xl tracking-wide">
             COFFEE CREW
