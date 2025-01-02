@@ -3,24 +3,44 @@ import { Facebook, Instagram, Twitter, Mail, MapPin } from "lucide-react";
 const Hero = () => {
   return (
     <section className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden">
-      {/* Fondo con gradiente y overlay */}
+      {/* Fondo con gradiente y efectos */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-nomada-dark via-black to-nomada-dark"
+        className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/lovable-uploads/65499582-2886-41ff-b5a1-361cd105d87f.png')`,
+          backgroundImage: `
+            linear-gradient(
+              rgba(0, 0, 0, 0.7),
+              rgba(0, 0, 0, 0.7)
+            ),
+            url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2070&auto=format&fit=crop')
+          `,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
       />
       
-      {/* Efecto de partículas/granos de café */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute w-2 h-2 bg-nomada-gold rounded-full animate-pulse" style={{ top: '20%', left: '20%' }} />
-        <div className="absolute w-2 h-2 bg-nomada-gold rounded-full animate-pulse" style={{ top: '60%', left: '70%' }} />
-        <div className="absolute w-2 h-2 bg-nomada-gold rounded-full animate-pulse" style={{ top: '80%', left: '30%' }} />
-        <div className="absolute w-2 h-2 bg-nomada-gold rounded-full animate-pulse" style={{ top: '40%', left: '80%' }} />
+      {/* Efecto de vapor de café */}
+      <div className="absolute inset-0 opacity-20">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-20 bg-nomada-beige rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.5}s`,
+              opacity: 0.6,
+              filter: 'blur(8px)'
+            }}
+          />
+        ))}
       </div>
+
+      {/* Overlay con gradiente */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black opacity-60"
+      />
 
       {/* Contenido principal */}
       <div className="relative z-10">
@@ -30,12 +50,15 @@ const Hero = () => {
           className="w-64 md:w-80 mb-8 animate-fadeIn drop-shadow-2xl hover:scale-105 transition-transform duration-300"
         />
         
-        {/* Línea decorativa */}
-        <div className="w-32 h-0.5 bg-gradient-to-r from-transparent via-nomada-gold to-transparent mx-auto my-6" />
+        {/* Línea decorativa con efecto brillante */}
+        <div className="relative w-32 h-0.5 mx-auto my-6 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-nomada-gold to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-shine" />
+        </div>
         
         {/* Social Icons con efectos mejorados */}
         <div 
-          className="flex gap-6 mt-8 animate-fadeIn bg-black/30 px-8 py-4 rounded-full backdrop-blur-sm"
+          className="flex gap-6 mt-8 animate-fadeIn bg-black/30 px-8 py-4 rounded-full backdrop-blur-sm border border-nomada-gold/20"
           style={{ animationDelay: "0.2s" }}
         >
           {[
@@ -55,19 +78,12 @@ const Hero = () => {
           ))}
         </div>
 
-        {/* Imagen circular con efecto */}
-        <div 
-          className="flex gap-4 mt-12 animate-fadeIn"
-          style={{ animationDelay: "0.4s" }}
-        >
-          <div className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-nomada-gold to-nomada-beige rounded-full opacity-75 group-hover:opacity-100 transition duration-300 blur"></div>
-            <img 
-              src="/lovable-uploads/65499582-2886-41ff-b5a1-361cd105d87f.png" 
-              alt="Coffee Art" 
-              className="relative w-32 h-32 rounded-full object-cover transform group-hover:scale-105 transition duration-300"
-            />
-          </div>
+        {/* Decorative coffee beans */}
+        <div className="absolute -left-20 top-1/2 transform -translate-y-1/2 opacity-20">
+          <div className="w-40 h-40 rounded-full border border-nomada-gold/30 animate-spin-slow" />
+        </div>
+        <div className="absolute -right-20 top-1/2 transform -translate-y-1/2 opacity-20">
+          <div className="w-40 h-40 rounded-full border border-nomada-gold/30 animate-spin-slow-reverse" />
         </div>
       </div>
     </section>
