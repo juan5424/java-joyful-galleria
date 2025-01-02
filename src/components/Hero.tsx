@@ -3,88 +3,93 @@ import { Facebook, Instagram, Twitter, Mail, MapPin } from "lucide-react";
 const Hero = () => {
   return (
     <section className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-hidden">
-      {/* Fondo con gradiente y efectos */}
+      {/* Fondo dinámico con gradientes */}
       <div 
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(
-              rgba(0, 0, 0, 0.7),
-              rgba(0, 0, 0, 0.7)
-            ),
-            url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2070&auto=format&fit=crop')
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      />
-      
-      {/* Efecto de vapor de café */}
-      <div className="absolute inset-0 opacity-20">
-        {[...Array(8)].map((_, i) => (
+        className="absolute inset-0 bg-gradient-to-br from-nomada-dark via-[#2C1810] to-[#1A0F09]"
+      >
+        {/* Círculos decorativos con gradientes */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-nomada-gold/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-nomada-beige/10 to-transparent rounded-full blur-3xl" />
+      </div>
+
+      {/* Patrón de granos de café */}
+      <div className="absolute inset-0 opacity-5">
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-20 bg-nomada-beige rounded-full animate-float"
+            className="absolute w-8 h-12 rounded-full border border-nomada-gold/30"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              opacity: 0.6,
-              filter: 'blur(8px)'
+              transform: `rotate(${Math.random() * 360}deg)`,
+              animation: `float ${5 + Math.random() * 5}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 5}s`
             }}
           />
         ))}
       </div>
 
-      {/* Overlay con gradiente */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black opacity-60"
-      />
+      {/* Efecto de luz radial */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
       {/* Contenido principal */}
-      <div className="relative z-10">
-        <img
-          src="/lovable-uploads/340f2485-9b81-43a7-a493-b6dbda845ad9.png"
-          alt="Nomada Coffee Logo"
-          className="w-64 md:w-80 mb-8 animate-fadeIn drop-shadow-2xl hover:scale-105 transition-transform duration-300"
-        />
-        
-        {/* Línea decorativa con efecto brillante */}
-        <div className="relative w-32 h-0.5 mx-auto my-6 overflow-hidden">
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Logo con efecto de brillo */}
+        <div className="relative inline-block mb-12">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-nomada-gold/20 to-transparent animate-shine" />
+          <h1 className="text-6xl md:text-8xl font-bold text-nomada-gold mb-4 tracking-tighter">
+            NÓMADA
+          </h1>
+          <p className="text-nomada-beige/80 text-xl md:text-2xl tracking-wide">
+            COFFEE CREW
+          </p>
+        </div>
+
+        {/* Línea decorativa animada */}
+        <div className="relative w-32 h-0.5 mx-auto my-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-nomada-gold to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-shine" />
         </div>
-        
+
+        {/* Texto descriptivo con animación */}
+        <p 
+          className="text-nomada-beige/90 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed animate-fadeIn"
+          style={{ animationDelay: "0.3s" }}
+        >
+          Descubre el arte del café en cada taza, donde la pasión se encuentra con la perfección
+        </p>
+
         {/* Social Icons con efectos mejorados */}
         <div 
-          className="flex gap-6 mt-8 animate-fadeIn bg-black/30 px-8 py-4 rounded-full backdrop-blur-sm border border-nomada-gold/20"
-          style={{ animationDelay: "0.2s" }}
+          className="flex gap-8 justify-center animate-fadeIn"
+          style={{ animationDelay: "0.6s" }}
         >
           {[
-            { icon: Facebook, href: "#" },
-            { icon: Instagram, href: "#" },
-            { icon: Twitter, href: "#" },
-            { icon: Mail, href: "#" },
-            { icon: MapPin, href: "#" }
+            { icon: Facebook, href: "#", label: "Facebook" },
+            { icon: Instagram, href: "#", label: "Instagram" },
+            { icon: Twitter, href: "#", label: "Twitter" },
+            { icon: Mail, href: "#", label: "Email" },
+            { icon: MapPin, href: "#", label: "Ubicación" }
           ].map((item, index) => (
             <a 
               key={index}
               href={item.href}
-              className="text-nomada-gold hover:text-nomada-beige transition-colors transform hover:scale-110 duration-300"
+              aria-label={item.label}
+              className="group relative p-3 bg-black/30 rounded-full border border-nomada-gold/20 backdrop-blur-sm hover:scale-110 transition-all duration-300"
             >
-              <item.icon className="w-6 h-6" />
+              <item.icon className="w-6 h-6 text-nomada-gold group-hover:text-nomada-beige transition-colors" />
+              <div className="absolute inset-0 bg-nomada-gold/10 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
           ))}
         </div>
+      </div>
 
-        {/* Decorative coffee beans */}
-        <div className="absolute -left-20 top-1/2 transform -translate-y-1/2 opacity-20">
-          <div className="w-40 h-40 rounded-full border border-nomada-gold/30 animate-spin-slow" />
-        </div>
-        <div className="absolute -right-20 top-1/2 transform -translate-y-1/2 opacity-20">
-          <div className="w-40 h-40 rounded-full border border-nomada-gold/30 animate-spin-slow-reverse" />
-        </div>
+      {/* Elementos decorativos flotantes */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2">
+        <div className="w-48 h-48 border border-nomada-gold/10 rounded-full animate-spin-slow opacity-20" />
+      </div>
+      <div className="absolute right-0 bottom-1/4">
+        <div className="w-32 h-32 border border-nomada-beige/10 rounded-full animate-spin-slow-reverse opacity-20" />
       </div>
     </section>
   );
